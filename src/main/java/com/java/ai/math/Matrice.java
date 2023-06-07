@@ -58,6 +58,8 @@ public class Matrice {
     double[][] res = new double[this.dim_x][b[0].length];
 
     if (this.dim_y != b.length) {
+      System.err.println("dim A : "+this.dim_y);
+      System.err.println("dim B : "+b.length);
       System.err.println("Erreur de dimension. Impossible de faire une multiplication");
       return new Matrice(this.a).zeros();
     } else {
@@ -338,6 +340,7 @@ public class Matrice {
 
     int len_x = tab1.length;
     int len_y = tab1[0].length + tab2[0].length;
+    int N = tab1[0].length;
 
     double[][] res = new double[len_x][len_y];
 
@@ -350,16 +353,21 @@ public class Matrice {
         for (int j = 0; j < tab1[0].length; j++) {
           res[i][j] = tab1[i][j];
         }
-        pos_x++;
-      }
-
-      for (int ic = 0; ic < tab2.length; ic++) {
-        pos_x2 = pos_x;
-        for (int jc = 0; jc < tab2[0].length; jc++) {
-          res[ic][pos_x2] = tab2[ic][jc];
-          pos_x2 += 1;
+        for(int j = 0; j < tab2[0].length; j++)
+        {
+            res[i][j+tab1[0].length] = tab2[i][j];
         }
       }
+
+      // for (int ic = 0; ic < tab2.length; ic++) {
+      //   //pos_x2 = pos_x+1;
+      //   for (int jc = 0; jc < tab2[0].length; jc++) {
+      //     res[ic][pos_x] = tab2[ic][jc];
+      //     System.err.println("Pos x : "+pos_x2);
+      //     // System.err.println("Pos x : "+tab2[ic][jc]);
+      //   }
+      //   pos_x ++;
+      //}
 
     } else {
       System.err.println("Dimension inégale, impossible de combiner");
@@ -412,7 +420,7 @@ public class Matrice {
    */
   public int[] shape() {
     int[] shape = { this.dim_x, this.dim_y };
-    System.out.println("(" + this.dim_x + "," + this.dim_y + ")");
+    //System.out.println("(" + this.dim_x + "," + this.dim_y + ")");
     return shape;
   }
 
@@ -521,11 +529,27 @@ public class Matrice {
     {
       for (int j = 0; j < n; j++)// remplissage ligne
       {
-        nombre = Math.random() * 1.13; // utilisation de la fonction random défini dans l'intervalle ]0;10[
+        nombre = Math.random() * 10 +2; // utilisation de la fonction random défini dans l'intervalle ]0;10[
         tab[i][j] = nombre; // on rempli notre matrice
         // System.out.println(tab[i][j]); //on l'affiche en console
       }
     }
+    return new Matrice(tab);
+  }
+
+  public Matrice round(){
+
+    double[][] tab = new double[this.dim_x][this.dim_y];
+
+    for (int i = 0; i < this.dim_x; i++)
+    {
+      for (int j = 0; j < this.dim_y; j++)
+      {
+        tab[i][j] = Math.round(this.a[i][j]*100.0)/100.0;
+        //System.out.println(tab[i][j]);
+      }
+    }
+    
     return new Matrice(tab);
   }
 

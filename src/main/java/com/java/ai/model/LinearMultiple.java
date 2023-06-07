@@ -5,9 +5,13 @@ import com.java.ai.math.Matrice;
 public class LinearMultiple {
 
 	//public t[][]
+	// public Matrice theta = new Matrice(new double [][] {{1.8831507},{-1.34775906}});
 	public Matrice theta;
+	public Matrice final_theta;
 	public double learning_rate = 0.01;
 	public int iterations = 100;
+	public Matrice ix;
+	public Matrice iy;
 	
 	public LinearMultiple() {
 		super();
@@ -23,12 +27,22 @@ public class LinearMultiple {
 		this.iterations = iterations;
 	}
 
-	public LinearMultiple(double learning_rate, int iterations) {
+	public LinearMultiple(double learning_rate, int iterations, Matrice theta) {
 		super();
-		//this.teta = new Matrice(new double [][] {{1.8831507},{-1.34775906}});
-		//this.theta = theta;
+		this.theta = theta;
 		this.learning_rate = learning_rate;
 		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
+	public LinearMultiple(double learning_rate, int iterations) {
+		super();
+		this.theta = new Matrice().random(2, 1);
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
 	}
 	
 	public Matrice model(Matrice X, Matrice teta){
@@ -36,19 +50,39 @@ public class LinearMultiple {
 	}
 
 	public void fit(Matrice X, Matrice y){
-		//Matrice cost_history = gradient_descent(X, y, this.theta, this.learning_rate, this.iterations);
-		this.theta = gradient_descent(X, y, this.theta, this.learning_rate, this.iterations);
+		this.final_theta = gradient_descent(X, y, this.theta, this.learning_rate, this.iterations);
 	}
 
 	public Matrice predict(Matrice X){
-		return model(X, this.theta);
+		return model(X,this.final_theta);
+	}
+	public String [][] getParams(){
+		String [][] params = new String [2][4];
+		// params[0][0] = "theta_initial";
+		// params[0][1] = String.valueOf(theta);
+		// params[1][0] = "theta_final";
+		// params[1][1] = String.valueOf(this.final_theta);
+		// params[2][0] = "learning_rate";
+		// params[2][1] = String.valueOf(this.learning_rate);
+		// params[3][0] = "iterations";
+		// params[3][1] = String.valueOf(this.iterations);
+
+		// for(int i=0; i<params.length;i++){
+		// 	for(int j=0; j<params[0].length;j++){
+		// 		System.out.println(params[i][j]);
+		// 		System.out.print(" => " +params[i][j]);
+		// 	}
+		// }
+		return params;
 	}
 
 	public double cost_function(Matrice X, Matrice y, Matrice theta){
-		
+
 		double cout = 0;
-		
+
 		Matrice model = this.model(X, theta);
+
+		// Matrice model = X.dot(theta);
 		
 		Matrice erreur = model.subtract(y).pow(2);
 		double erreur_tab [][] = erreur.array();
@@ -63,10 +97,8 @@ public class LinearMultiple {
 	}
 
 	public Matrice gradient(Matrice X, Matrice y, Matrice theta){
-
+	
 		double m = y.shape()[0];
-
-		//Matrice modelr = model(X, theta);
 
 		Matrice grad = model(X, theta).subtract(y);
 
@@ -75,8 +107,6 @@ public class LinearMultiple {
 		Matrice res = transpose.dot(grad);
 
 		double m_inv = 1/m ;
-
-		//System.out.println(" m : " +m_inv);
 
 		return res.dot(m_inv);
 	}
@@ -93,12 +123,12 @@ public class LinearMultiple {
 
 			cost_story.array()[0][i] = cost_function(X, Y, theta);
 
-			//theta.show();
-			//theta = new_theta;
-			//System.out.println("Teta");
-			// theta.show();
 		}
-		//cost_story.show();
+
+		this.final_theta = theta;
+
+		System.out.println("Theta finale : ");
+		this.final_theta.show();
 		return theta;
 	}
 
@@ -114,20 +144,15 @@ public class LinearMultiple {
 
 			cost_story.array()[0][i] = cost_function(X, Y, theta);
 
-			//theta.show();
-			//theta = new_theta;
-			//System.out.println("Teta");
-			// theta.show();
 		}
-		//cost_story.show();
 		return cost_story;
 	}
 
-	/*public Matrice predict(){
 
-	}*/
+	public double score (Matrice X, Matrice Y){
 
-	public double r2 (Matrice Y, Matrice y_pred){
+		Matrice y_pred = predict(X);
+
 		Matrice U = Y.subtract(y_pred).pow(2);
 		Matrice V = Y.subtract(Y.mean()).pow(2);
 		double [][] u = U.array();
@@ -143,7 +168,7 @@ public class LinearMultiple {
 			s2+=v[J][0];
 		}
 		
-		System.out.println("r2 : "+(1-(s1/s2)));
+		System.out.println("Score r2 : "+(1-(s1/s2))*100 +" %");
 
 		return 1-(s1/s2);
 	}
