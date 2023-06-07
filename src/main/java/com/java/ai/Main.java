@@ -1,9 +1,8 @@
-package com.javaai;
+package com.java.ai;
 
 import com.java.ai.math.Matrice;
-import com.java.ai.math.Matrix;
+// import com.java.ai.model.LinearRegression;
 import com.java.ai.model.LinearMultiple;
-import com.java.ai.model.LinearRegression;
 
 public class Main {
 
