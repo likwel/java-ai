@@ -10,8 +10,9 @@ public class LinearMultiple {
 	public Matrice final_theta;
 	public double learning_rate = 0.01;
 	public int iterations = 100;
-	public Matrice ix;
-	public Matrice iy;
+	public int n_features = 1;
+	// public Matrice ix;
+	// public Matrice iy;
 	
 	public LinearMultiple() {
 		super();
@@ -36,6 +37,16 @@ public class LinearMultiple {
 		System.out.println("iterations : " +iterations);
 	}
 
+	public LinearMultiple(double learning_rate, int iterations, int n_features) {
+		super();
+		this.n_features = n_features;
+		this.theta = new Matrice().random(n_features +1, 1);
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
 	public LinearMultiple(double learning_rate, int iterations) {
 		super();
 		this.theta = new Matrice().random(2, 1);
@@ -50,10 +61,12 @@ public class LinearMultiple {
 	}
 
 	public void fit(Matrice X, Matrice y){
+		X = X.combine(new Matrice().ones(X.shape()[0],1));
 		this.final_theta = gradient_descent(X, y, this.theta, this.learning_rate, this.iterations);
 	}
 
 	public Matrice predict(Matrice X){
+		X = X.combine(new Matrice().ones(X.shape()[0],1));
 		return model(X,this.final_theta);
 	}
 	public String [][] getParams(){
