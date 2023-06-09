@@ -33,7 +33,7 @@ public class Main {
 
 		Matrice y_pred = model.predict(x_pred);
 		y_pred.show();
-		model.getParams();
+		//model.getParams();
 
 		Reader reader = new Reader();
 		//double data[][] = reader.read_txt_double("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
