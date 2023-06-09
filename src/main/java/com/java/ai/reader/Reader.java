@@ -14,7 +14,7 @@ public class Reader {
     public Reader() {
         
     }
-    public String [][] read_txt_str(String path, String delimitor) {
+    public Matrice read_to_str(String path, String delimitor) {
         //int m = 1;
 
         File file = new File((path));
@@ -74,9 +74,9 @@ public class Reader {
             e.printStackTrace();
         }
 
-        return matrix;
+        return new Matrice(matrix);
     }
-    public double [][] read_txt_double(String path, String delimitor) {
+    public Matrice read_to_double(String path, String delimitor) {
         //int m = 1;
 
         File file = new File((path));
@@ -133,6 +133,6 @@ public class Reader {
             e.printStackTrace();
         }
 
-        return matrix;
+        return new Matrice(matrix);
     }
 }

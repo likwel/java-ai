@@ -1,9 +1,14 @@
 package com.java.ai;
 
+import java.io.File;
+
+import javax.swing.text.html.parser.DTD;
+
 import com.java.ai.math.Matrice;
 // import com.java.ai.model.LinearRegression;
 import com.java.ai.model.LinearMultiple;
 import com.java.ai.processing.DataFormater;
+import com.java.ai.processing.DataFrame;
 import com.java.ai.reader.Reader;
 
 public class Main {
@@ -35,24 +40,18 @@ public class Main {
 		y_pred.show();
 		//model.getParams();
 
+		//RunTime r = RunTime.getRunTime();
+		//Process p = r.exec("chemin de ta page");
+
 		Reader reader = new Reader();
 		//double data[][] = reader.read_txt_double("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
-		String data_str[][] = reader.read_txt_str("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
-		double data_y[][] = new double [][] {{ 1.76405235},{ 0.50116731},{ 1.18075819},{ 2.5439235 },{ 2.27159839},{-0.47222737},{ 1.55614902},{ 0.5557135 },{ 0.70486196},{ 1.31968941}};
-		//Matrice Data_X = new Matrice(data);
-		//Data_X = Data_X.combine(new Matrice().ones(Data_X.shape()[0],1)).round();
-		Matrice Data_Y = new Matrice(data_y);
-		double teta_test[][] = new double [][] {{1.8831507},{-1.34775906},{ 1.18075819}};
-		Matrice t = new Matrice(teta_test);
-		// System.out.println("\n t.shape() : "+t.shape()[0]);
-		// System.out.println("\n X.shape() : "+Data_X.shape()[1]);
-		//t.shape();
-		//DataFormater df = new DataFormater();
-		
-		
-		//Matrice Data_X_STR = df.moveFirstLine(new Matrice(data_str));
-		//Data_X_STR.show();
+		Matrice Data_Y = reader.read_to_str("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
 
+		Data_Y.show();
+
+		DataFrame df = new DataFrame(Data_Y);
+		Matrice data = df.get("Etat","Num","Frais");
+		data.show();
 	}
 
 }

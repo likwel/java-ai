@@ -35,22 +35,41 @@ public class Matrice {
      */
     public Matrice T() {
 
-        int n = this.a.length;
-
         double b[][] = new double[this.dim_y][this.dim_x];
+        String s[][] = new String[this.dim_y][this.dim_x];
 
-        for (int i = 0; i < this.dim_y; i++) {
-            for (int j = 0; j < this.dim_x; j++) {
-                b[i][j] = 0;
-                for (int k = 0; k < n; k++) {
-                    b[i][j] = this.a[j][i];
+        if(this.a != null){
+            int n = this.a.length;
+            for (int i = 0; i < this.dim_y; i++) {
+                for (int j = 0; j < this.dim_x; j++) {
+                    b[i][j] = 0;
+                    for (int k = 0; k < n; k++) {
+                        b[i][j] = this.a[j][i];
+                    }
+                    // System.out.print(b[i][j]+" ");
                 }
-                // System.out.print(b[i][j]+" ");
+                // System.out.println();
             }
-            // System.out.println();
+    
+            return new Matrice(b);
+        }else{
+            int n = this.s.length;
+            for (int i = 0; i < this.dim_y; i++) {
+                for (int j = 0; j < this.dim_x; j++) {
+                    b[i][j] = 0;
+                    for (int k = 0; k < n; k++) {
+                        s[i][j] = this.s[j][i];
+                    }
+                    // System.out.print(b[i][j]+" ");
+                }
+                // System.out.println();
+            }
+    
+            return new Matrice(s);
         }
 
-        return new Matrice(b);
+
+        
     }
 
     /**
@@ -398,10 +417,21 @@ public class Matrice {
 
         for (int i = 0; i < this.dim_x; i++) {
             for (int j = 0; j < this.dim_y; j++) {
-                this.s[i][j] = String.valueOf(this.a[i][j]);
+                this.s[i][j] = String.valueOf(this.s[i][j]);
             }
         }
         return this.s;
+    }
+
+
+    public double[][] toDouble() {
+
+        for (int i = 0; i < this.dim_x; i++) {
+            for (int j = 0; j < this.dim_y; j++) {
+                this.a[i][j] = Double.valueOf(this.s[i][j]);
+            }
+        }
+        return this.a;
     }
 
     /**
