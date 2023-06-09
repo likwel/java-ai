@@ -1,5 +1,10 @@
 package com.java.ai.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
 import com.java.ai.math.Matrice;
 
 public class LinearMultiple {
@@ -69,24 +74,20 @@ public class LinearMultiple {
 		X = X.combine(new Matrice().ones(X.shape()[0],1));
 		return model(X,this.final_theta);
 	}
-	public String [][] getParams(){
-		String [][] params = new String [2][4];
-		// params[0][0] = "theta_initial";
-		// params[0][1] = String.valueOf(theta);
-		// params[1][0] = "theta_final";
-		// params[1][1] = String.valueOf(this.final_theta);
-		// params[2][0] = "learning_rate";
-		// params[2][1] = String.valueOf(this.learning_rate);
-		// params[3][0] = "iterations";
-		// params[3][1] = String.valueOf(this.iterations);
 
-		// for(int i=0; i<params.length;i++){
-		// 	for(int j=0; j<params[0].length;j++){
-		// 		System.out.println(params[i][j]);
-		// 		System.out.print(" => " +params[i][j]);
-		// 	}
-		// }
-		return params;
+	public JSONObject getParams(){
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("theta_initiale", this.theta.array());
+		map.put("theta_finale", this.final_theta.array());
+		map.put("learning_rate", this.learning_rate);
+		map.put("iterations", this.iterations);
+		map.put("n_features", this.n_features);
+		
+		JSONObject jo = new JSONObject(map);
+		
+		System.out.println(jo);
+		return jo;
 	}
 
 	public double cost_function(Matrice X, Matrice y, Matrice theta){

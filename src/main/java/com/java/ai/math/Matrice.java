@@ -26,6 +26,7 @@ public class Matrice {
     }
 
     public Matrice() {
+        
     }
 
     /**
@@ -423,7 +424,10 @@ public class Matrice {
         return this.s;
     }
 
-
+    /**
+     * Fonction qui converse un tableau String en tableau double
+     * @return tableau
+     */
     public double[][] toDouble() {
 
         for (int i = 0; i < this.dim_x; i++) {
@@ -537,6 +541,14 @@ public class Matrice {
         return new Matrice(res);
     }
 
+
+    /**
+     * Fonction qui split un tableau ligne par ligne et colonne par colonne
+     * @param start
+     * @param end
+     * @param axis : axe à séparer : 0 si ligne et 1 si colonne
+     * @return matrice
+     */
     public Matrice slice(int start, int end, int axis) {
 
         int m = this.a.length;

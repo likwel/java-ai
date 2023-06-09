@@ -1,4 +1,5 @@
 package com.java.ai.processing;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class DataFrame {
 
         Map<String, String[]> map_t = new HashMap<String, String[]>();
 
-        for(int i=0; i<dataTranspo.length; i++){
+        for(int i=0; i < dataTranspo.length; i++){
             String [] data_b = new String[dataTranspo[0].length-1];
             for(int j=1; j<dataTranspo[0].length; j++){
                 data_b[j-1]=dataTranspo[i][j];
@@ -74,6 +75,12 @@ public class DataFrame {
 
         return M;
 
+    }
+
+    public String [] head(){
+        String [][] data = this.M.arrayString();
+        System.out.println(Arrays.toString(data[0])); 
+        return data[0];
     }
 
 }

@@ -1,13 +1,8 @@
 package com.java.ai;
 
-import java.io.File;
-
-import javax.swing.text.html.parser.DTD;
-
 import com.java.ai.math.Matrice;
 // import com.java.ai.model.LinearRegression;
 import com.java.ai.model.LinearMultiple;
-import com.java.ai.processing.DataFormater;
 import com.java.ai.processing.DataFrame;
 import com.java.ai.reader.Reader;
 
@@ -38,16 +33,13 @@ public class Main {
 
 		Matrice y_pred = model.predict(x_pred);
 		y_pred.show();
-		//model.getParams();
-
-		//RunTime r = RunTime.getRunTime();
-		//Process p = r.exec("chemin de ta page");
+		model.getParams();
 
 		Reader reader = new Reader();
 		//double data[][] = reader.read_txt_double("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
 		Matrice Data_Y = reader.read_to_str("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
 
-		Data_Y.show();
+		//Data_Y.show();
 
 		DataFrame df = new DataFrame(Data_Y);
 		Matrice data = df.get("Etat","Num","Frais");
