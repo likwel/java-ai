@@ -1,140 +1,286 @@
 package com.java.ai.model;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import com.java.ai.math.Matrice;
+
 public class LinearRegression {
-	
-	public double X [];
-	public double y[];
-	
-	public double a;
-	
-	public double b;
 
-	public String nature = "";
+	public Matrice theta;
+	public Matrice final_theta;
+	public double learning_rate = 0.01;
+	public int iterations = 100;
+	public int n_features = 1;
+	public String estimator = "least_square";
+
 	
-	public LinearRegression(String nature) {
+	public LinearRegression() {
 		super();
-		this.nature = nature;
+	}
+
+	public LinearRegression(double learning_rate) {
+		super();
+		this.learning_rate = learning_rate;
+	}
+
+	public LinearRegression(int iterations) {
+		super();
+		this.iterations = iterations;
+	}
+
+	public LinearRegression(double learning_rate, int iterations, Matrice theta) {
+		super();
+		this.theta = theta;
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
+	public LinearRegression(double learning_rate, int iterations, int n_features) {
+		super();
+		this.n_features = n_features;
+		//this.theta = new Matrice().random(n_features +1, 1);
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
+	public LinearRegression(double learning_rate, int iterations, int n_features, String estimator) {
+		super();
+		this.n_features = n_features;
+		this.estimator = estimator;
+		//this.theta = new Matrice().random(n_features +1, 1);
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
+	public LinearRegression(double learning_rate, int iterations) {
+		super();
+		//this.theta = new Matrice().random(2, 1);
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
+	}
+
+	public LinearRegression(double learning_rate, int iterations, String estimator) {
+		super();
+		this.estimator = estimator;
+		this.learning_rate = learning_rate;
+		this.iterations = iterations;
+		System.out.println("learning_rate : " +learning_rate);
+		System.out.println("iterations : " +iterations);
 	}
 	
-	/**
-	 * 
-	 * @param X : la variable explicative, indépendante
-	 * @param y : la variable cible, aléatoire dépendante
-	 */
-	public void train(double[] X, double[] y) {
+	public Matrice model(Matrice X, Matrice teta){
+		return X.dot(teta);
+	}
 
-		if(this.nature =="simple"){
-			double somme_xy = 0;
-			double somme_xx = 0;
-			double somme_x = 0;
-			double somme_y = 0;
-			
-			double n = X.length;
-	
-			for(int i=0; i< n;i++) {
-				somme_xy +=X[i]*y[i];
-				somme_xx +=X[i]*X[i];
-				somme_x +=X[i];
-				somme_y +=y[i];
-			}
-			
-			double s_xy = somme_xy - ((somme_x * somme_y)/n);
-			double s_xx = somme_xx - ((somme_x * somme_x)/n);
-			//double be = s_xy/s_xx;
-	
-			
-			this.b = s_xy/s_xx;
-	
-			System.out.println("Regression linéaire "+this.nature);
-	
-			System.out.println("a = "+this.b);
-			
-			double x_moyenne = average(X);
-			
-			double y_moyenne = average(y);
-			
-			this.a = (y_moyenne - (this.b*x_moyenne));
-	
-			System.out.println("b = "+this.a);
-			this.X = X;
-			this.y =y;
-		}else{
-			System.out.println("Ici regression linéaire multiple");
-		}
+	public void fit(Matrice X, Matrice y){
+		X = X.combine(new Matrice().ones(X.shape()[0],1));
+		this.theta = getTheta(X, y, this.estimator);
+		this.final_theta = gradient_descent(X, y, this.theta, this.learning_rate, this.iterations);
+	}
+
+	public Matrice predict(Matrice X){
+		X = X.combine(new Matrice().ones(X.shape()[0],1));
+		return model(X,this.final_theta);
+	}
+
+	public JSONObject getParams(){
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("theta_initiale", this.theta.array());
+		map.put("theta_finale", this.final_theta.array());
+		map.put("learning_rate", this.learning_rate);
+		map.put("iterations", this.iterations);
+		map.put("n_features", this.n_features);
 		
-	}
-
-	/**
-	 * 
-	 * @param Vect : un vecteur ou tableau à une dimmension
-	 * @return moyenne : retourne à une moyenne d'un vecteur ou tableau
-	 */
-	
-	public static double average(double Vect []) {
+		JSONObject jo = new JSONObject(map);
 		
-		double somme = 0;
-		for(double x : Vect) {
-			
-			somme +=x;
-		}
-		double moyenne = somme/Vect.length;
-		
-		return moyenne;
+		System.out.println(jo);
+		return jo;
 	}
 
-
-	/***
-	 * 
-	 * @param x : la variable explicative
-	 * @return y_pred : return à la variable predite
-	 */
-	public double predict(double x) {
-		return this.a + this.b *x ;
-	}
-
-	/**
-	 * 
-	 * @param X : la variable explicative, indépendante
-	 * @param y : la variable cible, aléatoire dépendante
-	 * @return r2 : retourne au coefficient de determination
-	 */
-	public double score(){
-
-		double x_bar = average(X);
-
-		double y_bar = average(y);
-		
-		double n=this.X.length;
-
-		double numerateur = 0;
-
-		double d_1 = 0;
-
-		double d_2 = 0;
-
-		for(int i=0; i<n;i++){
-			numerateur += (this.X[i]-x_bar)*(this.y[i]-y_bar);
-			d_1 += (this.X[i]-x_bar)*(this.X[i]-x_bar);
-			d_2 += (this.y[i]-y_bar)*(this.y[i]-y_bar);
-		}
-
-		double r2 = numerateur /((Math.sqrt(d_1))*(Math.sqrt(d_2)));
-
-		return r2;
-	}
-
-	public double cost(){
-
-		int n = this.X.length;
+	public double cost_function(Matrice X, Matrice y, Matrice theta){
 
 		double cout = 0;
 
-		for(int i=0; i<n; i++){
-			cout += (this.a*this.X[i]-this.y[i])*(this.a*this.X[i]-this.y[i]);
-		}
-		System.out.println("cout : "+cout);
+		Matrice model = this.model(X, theta);
 
-		return cout/(2*n);
+		// Matrice model = X.dot(theta);
+		
+		Matrice erreur = model.subtract(y).pow(2);
+		double erreur_tab [][] = erreur.array();
+
+		double m = y.shape()[0];
+	
+		for(int i=0; i < m; i++){
+			cout =cout+ erreur_tab[i][0];
+		}
+		return (1/(2*m)) * cout;
+
+	}
+
+	public Matrice gradient(Matrice X, Matrice y, Matrice theta){
+	
+		double m = y.shape()[0];
+
+		Matrice grad = model(X, theta).subtract(y);
+
+		Matrice transpose = X.T();
+
+		Matrice res = transpose.dot(grad);
+
+		double m_inv = 1/m ;
+
+		return res.dot(m_inv);
+	}
+
+	public Matrice gradient_descent(Matrice X, Matrice Y, Matrice theta, double learning_rate, int iteration){
+
+		Matrice cost_story = new Matrice().zeros(1, iteration);
+
+		for(int i=0; i < iteration;i++){
+
+			Matrice gradient = gradient(X, Y, theta).dot(learning_rate);
+			 
+			theta = theta.subtract(gradient);
+
+			cost_story.array()[0][i] = cost_function(X, Y, theta);
+
+		}
+
+		this.final_theta = theta;
+
+		System.out.println("Theta finale : ");
+		this.final_theta.show();
+		return theta;
+	}
+
+	public Matrice cost_history (Matrice X, Matrice Y, Matrice theta, double learning_rate, int iteration){
+
+		Matrice cost_story = new Matrice().zeros(1, iteration);
+
+		for(int i=0; i < iteration;i++){
+
+			Matrice gradient = gradient(X, Y, theta).dot(learning_rate);
+			 
+			theta = theta.subtract(gradient);
+
+			cost_story.array()[0][i] = cost_function(X, Y, theta);
+
+		}
+		return cost_story;
+	}
+
+
+	public double score (Matrice X, Matrice Y){
+
+		Matrice y_pred = predict(X);
+
+		Matrice U = Y.subtract(y_pred).pow(2);
+		Matrice V = Y.subtract(Y.mean()).pow(2);
+		double [][] u = U.array();
+		double [][] v = V.array();
+
+		double s1 = 0;
+		double s2 = 0;
+
+		int m = u.length;
+
+		for (int J = 0; J < m; J++) {
+			s1+=u[J][0];
+			s2+=v[J][0];
+		}
+		
+		System.out.println("Score r2 : "+(1-(s1/s2))*100 +" %");
+
+		return 1-(s1/s2);
+	}
+
+	public Matrice getTheta(Matrice X, Matrice Y, String estimator){
+
+		System.out.println("Theta initiale");
+
+		if(estimator=="least_square"){
+			return least_square(X,Y);
+
+		}else{
+			return mayer(X,Y);
+		}
+		
+	}
+	public Matrice least_square(Matrice X, Matrice Y){
+		Matrice prod_ = X.T().dot(X);
+		Matrice prod_2 = X.T().dot(Y);
+
+		prod_.inv().dot(prod_2).show();
+		return prod_.inv().dot(prod_2);
+
+	}
+
+	public Matrice mayer(Matrice X, Matrice Y){
+
+		if(this.n_features==1){
+			double [][] x =X.array();
+			double [][] y =Y.array();
+	
+			double [][] x_1 = new double[X.shape()[0]/2][X.shape()[1]];//X.array();
+			double [][] x_2 = new double[X.shape()[0]/2][X.shape()[1]];//X.array();
+			double [][] y_1 = new double[Y.shape()[0]/2][Y.shape()[1]]; //Y.array();
+			double [][] y_2 = new double[Y.shape()[0]/2][Y.shape()[1]]; //Y.array();
+	
+	
+			for (int I = 0; I < x.length; I++){
+				if(I<x.length/2)
+					for (int J = 0; J < x[0].length; J++) {
+						x_1[I][J] = x[I][J];
+					}
+				else
+					for (int J = 0; J < x[0].length; J++) {
+						x_2[I-(x.length/2)][J] = x[I][J];
+					}
+			}
+	
+			for (int I = 0; I < y.length/2; I++){
+				if(I<y.length/2)
+					for (int J = 0; J < y[0].length; J++) {
+						y_1[I][J] = y[I][J];
+					}
+				else
+					for (int J = 0; J < y[0].length; J++) {
+						y_2[I-(y.length/2)][J] = x[I][J];
+					}
+			}
+	
+			Matrice X1 = new Matrice(x_1).average();
+			Matrice X2 = new Matrice(x_2).average();
+			Matrice Y1 = new Matrice(y_1).average();
+			Matrice Y2 = new Matrice(y_2).average();
+			Matrice x_moyenne = X1.union(X2);
+			Matrice y_moyenne = Y1.union(Y2);
+	
+			Matrice theta = x_moyenne.inv().dot(y_moyenne);
+
+			theta.show();
+	
+			return theta;
+		}else{
+			System.err.println("Methode de Mayer n'est pas compatible à une prévision +/= à 3 features");
+			return least_square(X,Y);
+		}
+
+		
+
 	}
 	
 }

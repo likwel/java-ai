@@ -249,6 +249,30 @@ public class Matrice {
     }
 
     /**
+     * Fonction qui calcule la moyenne d'une matrice à dimension (m,n)
+     * 
+     * @return : Matrice moyenne
+     */
+    public Matrice average() {
+
+        int m = this.dim_x;
+        int n = this.dim_y;
+
+        double[][] S = new double[1][this.dim_y];
+
+        double somme = 0;
+        for (int J = 0; J < n; J++) {
+            for (int i = 0; i < m; i++) {
+                somme += this.a[i][J];
+            }
+            S[0][J] = somme/m;
+            somme = 0;
+        }
+
+        return new Matrice(S);
+    }
+
+    /**
      * Fonction qui calcule le déterminant d'une matrice
      * 
      * @return un nombre positif ou negatif ou à zéro
@@ -257,12 +281,15 @@ public class Matrice {
 
         double somme = 0.0;
         int sign = 1;
+
         for (int i = 0; i < this.dim_x; i++) {
             somme = somme + sign * this.a[0][i] * this.cofactor(0, i);
             sign = -sign;
-            // System.out.println(somme+" : somme");
+            //System.out.println("somme : "+  this.a[0][i] +"/"+this.cofactor(0, i));
+            
         }
         return somme;
+        
     }
 
     public Matrice moveline(int i) {
@@ -310,15 +337,22 @@ public class Matrice {
      * @return un nombre
      */
     public double cofactor(int i, int j) {
+
+        int n= this.dim_x;
+
         if (this.dim_x == this.dim_y) {
             if (this.dim_x > 3 && this.dim_y > 3) {
                 return (Math.pow(-1, i + j) * (this.minar(i, j).det()));
-            } else {
+            }else {
                 Matrice fin = this.minar(i, j);
 
                 double[][] ff = fin.array();
-                return ff[0][0] * ff[1][1] - ff[0][1] * ff[1][0];
-
+                if(ff.length ==2 ){
+                    return ff[0][0] * ff[1][1] - ff[0][1] * ff[1][0];
+                }else{
+                    return 1;
+                }
+                //return ff[0][0] * ff[1][1] - ff[0][1] * ff[1][0];
             }
         } else {
             System.out.println("Erreur : Matrice non carrée en input");
@@ -353,11 +387,23 @@ public class Matrice {
      */
     public Matrice inv() {
 
-        double determinant = new Matrice(this.a).det();
+        if(this.dim_x > 1){
+            
+            double determinant = new Matrice(this.a).det();
 
-        Matrice t_Comatrice = this.comatrix().T();
+            Matrice t_Comatrice = this.comatrix().T();
+    
+            return t_Comatrice.dot(1 / determinant);
+        }else{
 
-        return t_Comatrice.dot(1 / determinant);
+            Matrice origin = new Matrice(this.a);
+
+            Matrice inv = origin.dot(1/this.a[0][0]);
+    
+            return inv;
+        }
+
+        
     }
 
     /**
@@ -374,12 +420,8 @@ public class Matrice {
 
         int len_x = tab1.length;
         int len_y = tab1[0].length + tab2[0].length;
-        int N = tab1[0].length;
 
         double[][] res = new double[len_x][len_y];
-
-        int pos_x = 0;
-        int pos_x2 = 0;
 
         if (tab1.length == tab2.length) {
             for (int i = 0; i < tab1.length; i++) {
@@ -395,6 +437,45 @@ public class Matrice {
         } else {
             System.err.println("Dimension inégale, impossible de combiner");
         }
+
+        return new Matrice(res);
+
+    }
+
+    /**
+     * Fonction de combinaison de deux matrice de même longueur de colonne
+     * 
+     * @param B : la deuxième matrice à combiner
+     * @return : matrice
+     */
+    public Matrice union(Matrice B) {
+
+        double[][] tab2 = B.array();
+
+        double[][] tab1 = this.a;
+
+        int len_x = tab1.length + tab2.length;
+        int len_y = tab1[0].length;
+
+        double[][] res = new double[len_x][len_y];
+
+        if (tab1[0].length == tab2[0].length) {
+            for (int i = 0; i < tab1[0].length; i++) {
+                
+                for (int j = 0; j < tab1.length; j++) {
+                    // System.err.println("tab1[i][j] : "+" i :"+i+" j :"+j);
+                    res[j][i] = tab1[j][i];
+                }
+                for (int j = 0; j < tab2.length; j++) {
+                    res[j + tab1.length][i] = tab2[j][i];
+                }
+            }
+
+        } else {
+            System.err.println("Dimension inégale, impossible de combiner");
+        }
+
+        //new Matrice(res).show();
 
         return new Matrice(res);
 
@@ -609,6 +690,65 @@ public class Matrice {
         }
 
         return new Matrice(tab);
+    }
+
+    /*
+    public double max() {
+
+        double[][] tab = new double[this.dim_x][this.dim_y];
+
+        for (int i = 0; i < this.dim_x; i++) {
+            for (int j = 0; j < this.dim_y; j++) {
+                tab[i][j] = Math.round(this.a[i][j] * 100.0) / 100.0;
+                // System.out.println(tab[i][j]);
+            }
+        }
+
+        return tab;
+    }*/
+    public double max() {
+
+        int m = this.dim_x;
+
+        double max = this.a[0][0];
+        for (int J = 1; J <m; J++) {
+            if(this.a[J][0] > max){
+                max = this.a[J][0];
+            }
+        }
+
+        System.out.println("Maximum : "+max);
+
+        return max;
+    }
+
+    public double min() {
+
+        int m = this.dim_x;
+
+        double min = this.a[0][0];
+        for (int J = 1; J <m; J++) {
+            if(this.a[J][0] < min){
+                min = this.a[J][0];
+            }
+        }
+
+        System.out.println("Minimum : "+min);
+
+        return min;
+    }
+
+    public double minExtreme() {
+
+        System.out.println("Minimum : "+this.a[0][0]);
+
+        return this.a[0][0];
+    }
+    public double maxExtreme() {
+
+        System.out.println("Minimum : "+this.a[this.dim_x-1][0]);
+
+        return this.a[this.dim_x-1][0];
     }
 
 }

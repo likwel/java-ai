@@ -15,7 +15,7 @@ public class DataFrame {
         this.M = M;
     }
 
-    public Matrice get(String ...args){
+    public Matrice get(String ...columns){
 
         String [][] S = this.M.arrayString();
 
@@ -42,17 +42,17 @@ public class DataFrame {
 
         Matrice M = new Matrice();
 
-        for(int y=0; y < args.length; y++){
+        for(int y=0; y < columns.length; y++){
             if(y==0){
-                tot = tot +jo.get(args[y]).toString();
+                tot = tot +jo.get(columns[y]).toString();
             }else{
-                tot = tot + "~"+jo.get(args[y]).toString();
+                tot = tot + "~"+jo.get(columns[y]).toString();
             }
         }
 
         String[] br = tot.split("~");
 
-        String [][] datab_res = new String[S.length-1][args.length];
+        String [][] datab_res = new String[S.length-1][columns.length];
 
         for(int k=0; k<br.length; k++){
 
@@ -77,10 +77,15 @@ public class DataFrame {
 
     }
 
-    public String [] head(){
+    public String [] columns(){
         String [][] data = this.M.arrayString();
         System.out.println(Arrays.toString(data[0])); 
         return data[0];
+    }
+
+    public void save(String filename){
+        String [][] data = this.M.arrayString();
+        System.out.println(Arrays.toString(data[0])); 
     }
 
 }

@@ -2,11 +2,11 @@ package com.java.ai;
 
 import com.java.ai.math.Matrice;
 // import com.java.ai.model.LinearRegression;
-import com.java.ai.model.LinearMultiple;
+import com.java.ai.model.LinearRegression;
 import com.java.ai.processing.DataFrame;
 import com.java.ai.reader.Reader;
 
-public class Main {
+public class Test {
 
 	public static void main(String[] args) {
 		
@@ -15,15 +15,15 @@ public class Main {
 		double teta[][] = new double [][] {{1.8831507},{-1.34775906}};
 
 		Matrice X = new Matrice(ix);
-		
+
 		Matrice Y = new Matrice(iy);
-		//X.combine(Y).show();
+
 		Matrice Theta = new Matrice(teta);
 
 		Matrice x_pred = new Matrice(new double [][] {{ 3.14}});
-		x_pred.show();
+		//x_pred.show();
 
-		LinearMultiple model = new LinearMultiple(0.01,1000);
+		LinearRegression model = new LinearRegression(0.01,1000000);
 		model.fit(X, Y);
 		model.score(X, Y);
 		Matrice prediction = model.predict(X);
@@ -35,15 +35,17 @@ public class Main {
 		y_pred.show();
 		//model.getParams();
 
-		Reader reader = new Reader();
-		//double data[][] = reader.read_txt_double("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
-		Matrice Data_Y = reader.read_to_str("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
+		// Reader reader = new Reader();
+		// //double data[][] = reader.read_txt_double("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
+		// Matrice Data_Y = reader.read_to_str("C://Users//GEOMADA PC4//OneDrive//Bureau//Resto//data_test.txt","\\t");
 
-		//Data_Y.show();
+		// //Data_Y.show();
 
-		DataFrame df = new DataFrame(Data_Y);
-		Matrice data = df.get("Etat","Num","Frais");
-		data.show();
+		// DataFrame df = new DataFrame(Data_Y);
+		//Matrice data = df.get("Etat","Num","Frais");
+		//data.show();
+
+		
 	}
 
 }
