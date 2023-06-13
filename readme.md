@@ -9,11 +9,11 @@
 
 * Maven
 ```sh
-	<dependency>;
-	 <groupId>;com.java.ai</groupId>;
-     <artifactId>java-ai</artifactId>;
-     <version>;0.0.1-SNAPSHOT</version>;
-    </dependency>;
+<dependency>
+    <groupId>com.java.ai</groupId>
+    <artifactId>java-ai</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
 ```
 
 ## 🌱 Announce your dataset<br>
