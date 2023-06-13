@@ -31,10 +31,14 @@ Matrice Y = new Matrice(y);
 ```
 
 ## 👯 Train your model
+* List of Model available :
+    -   [LinearRegression](https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/model/LinearRegression.java), a statistically based model for Regression.
+    -   [LogisticRegression](https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/model/LogisticRegression.java), a probability based model for Classification.
+    
 * Train your first model <b><i>LinearRegression</i></b>
    <b>
         and set your parameters with 
-    </b> <i>learning_rate = 0.01</i>,<i>iterations = 1000</i> for example
+    </b> <i>learning_rate = 0.01</i>, <i>iterations = 1000</i> for example
 
 ```sh
 LinearRegression model = new LinearRegression(0.01,1000);
