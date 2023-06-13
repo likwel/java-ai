@@ -10,7 +10,7 @@
 	&lt;dependency&gt;
 	 &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
      &lt;artifactId>java-ai&lt;/artifactId&gt;
-  	 &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
     &lt;/dependency&gt;
  </pre>
 
