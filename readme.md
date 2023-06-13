@@ -47,6 +47,15 @@
 - 📝 Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
     For example We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 
+- 📫 Predict sample x data :
+    <pre>
+    Matrice x_pred = new Matrice(new double [][] {{ 3.14}});
+    Matrice y_pred = model.predict(x_pred);
+	y_pred.show();
+    </pre>
+    <b>Output : </b><br>
+    <i>y_pred : [[ 3.2489994144143095 ]]</i>
+
 - 📫 You can plot the initial dataset and forecast graph
 
 - 📄 Thank you for your use, <b>NB : this project is in development</b>
