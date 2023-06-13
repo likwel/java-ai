@@ -3,16 +3,16 @@
 
 <p align="left">This project is a prediction modeling API for Machine Learning and Deep Learning with Java</p>
 
-<h3>Documentation</h3>
+# Documentations
 
 ## 🔭 Install the dependency to your [maven](https://maven.apache.org/) project (copy into <i>pom.xml</i> file)
-<pre>
+```sh
 	&lt;dependency&gt;
 	 &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
      &lt;artifactId>java-ai&lt;/artifactId&gt;
      &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
     &lt;/dependency&gt;
- </pre>
+```
 
 ## 🌱 Announce your dataset<br>
 <b>For example : </b>
