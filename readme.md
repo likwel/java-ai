@@ -9,7 +9,7 @@
 
 * Open your [maven](https://maven.apache.org/) project and copy into <i>pom.xml</i> file this code Maven
 
-* Maven
+* Maven code :
 ```sh
 <dependency>
     <groupId>com.java.ai</groupId>
@@ -31,6 +31,14 @@ double y[][] = new double [][] {{ 1.76405235},{ 0.50116731},{ 1.18075819},{ 2.54
 *   Using a [Reader](https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/reader/Reader.java) API, you can read a file (txt, csv, xlsx,...) and store in Matrix
 *   You can transform this data to a [DataFrame](https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/processing/DataFrame.java) by using API
 *   For example : 
+```sh
+Reader reader = new Reader();
+Matrice data = reader.read_to_str("C://Users//PC_NAME//YOUR_PATH//data_test.txt","\\t");
+DataFrame df = new DataFrame(data);
+Matrice X = df.get("Etat","Num");
+Matrice Y = df.get("Frais");
+```
+
 ## 🤝 Transform your dataset to Matrix
 * Transform data to [Matrice](https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/math/Matrice.java) type to be accountable your Model
 ```sh
