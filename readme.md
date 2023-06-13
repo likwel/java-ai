@@ -58,7 +58,8 @@
     <hr>
 
 - 📫 You can plot the initial dataset and forecast graph
-
+    <img align="center" src="https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/teqlwe08.png" alt="forecast" />
+    
 - 📄 Thank you for your use, <b>NB : [this project is in development](https://github.com/likwel/java-ai)</b>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=likwel&" alt="likwel" /></p>
