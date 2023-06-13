@@ -24,12 +24,14 @@ double y[][] = new double [][] {{ 1.76405235},{ 0.50116731},{ 1.18075819},{ 2.54
 ```
 
 ## 🤝 Transform your dataset to Matrix
+* Transform data to Matrice type to be accountable your Model
 ```sh
 Matrice X = new Matrice(x);
 Matrice Y = new Matrice(y);
 ```
 
-## 👯 Train your first model
+## 👯 Train your model
+* Train your first model <b><i>LinearRegression</i></b>
    <b>
         and set your parameters with 
     </b> <i>learning_rate = 0.01</i>,<i>iterations = 1000</i> for example
@@ -39,7 +41,8 @@ LinearRegression model = new LinearRegression(0.01,1000);
 model.fit(X, Y);
 ```
 
-## 👨‍💻 Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
+## 👨‍💻 Show the score 
+* Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
 ```sh
 model.score(X, Y);
 ```
@@ -48,7 +51,8 @@ model.score(X, Y);
     <i>Score r2 = 88.88 %</i>
     <hr>
 
-## 📝 Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
+## 📝 Evaluate your model
+* Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
 For example We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 
 ## 📫 Predict sample x data :
