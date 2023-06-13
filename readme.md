@@ -5,13 +5,13 @@
 
 <h3>Documentation</h3>
 
-- 🔭 Install to your project the dependency (in pom.xml)
+- 🔭 Install to your maven project the dependency (in pom.xml)
     <pre>
 	&lt;dependency&gt;
-	  &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
-   	  &lt;artifactId>java-ai&lt;/artifactId&gt;
-  	  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    	&lt;/dependency&gt;
+	 &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
+     &lt;artifactId>java-ai&lt;/artifactId&gt;
+  	 &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
  </pre>
 
 - 🌱 I’m currently learning 
