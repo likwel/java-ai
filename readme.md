@@ -74,9 +74,12 @@ model.score(X, Y);
 
 ## 📝 Evaluate your model
 *   Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
-*   You increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
+*   You increase <i>learning_rate = 0.015</i>, <i>iterations = 20 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 *   For example :
-
+```sh
+LinearRegression model = new LinearRegression(0.015,20000);
+model.fit(X, Y);
+```
 ## 📫 Predict sample x data :
 *   To get a prediction of X data given, you can use a [predict] function whith a Matrix parameter.
 *   For example : 
