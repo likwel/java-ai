@@ -5,7 +5,7 @@
 
 <h3>Documentation</h3>
 
-- 🔭 Install this dependency to your [maven](https://maven.apache.org/) project (copy in <i>pom.xml</i>)
+- 🔭 Install the dependency to your [maven](https://maven.apache.org/) project (copy into <i>pom.xml</i> file)
     <pre>
 	&lt;dependency&gt;
 	 &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
