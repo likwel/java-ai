@@ -40,9 +40,8 @@
     <pre>
     model.score(X, Y);
     </pre>
-    <hr>
-    <b>Output : </b><br>
-    <i>Score r2 = 88.88 %</i>
+      <b>Output : </b><br>
+      <i>Score r2 = 88.88 %</i>
 
 - 📝 Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
     For example We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
@@ -53,9 +52,8 @@
     Matrice y_pred = model.predict(x_pred);
 	y_pred.show();
     </pre>
-    <hr>
-    <b>Output : </b><br>
-    <i>y_pred : [[ 3.2489994144143095 ]]</i>
+      <b>Output : </b><br>
+      <i>y_pred : [[ 3.2489994144143095 ]]</i>
 
 - 📫 You can plot the initial dataset and forecast graph
 
