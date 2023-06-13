@@ -42,6 +42,7 @@
     <hr>
     <b>Output : </b><br>
     <i>Score r2 = 88.88 %</i>
+    <hr>
 
 - 📝 Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
     For example We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
@@ -54,9 +55,10 @@
     <hr>
     <b>Output : </b><br>
     <i>y_pred : [[ 3.2489994144143095 ]]</i>
+    <hr>
 
 - 📫 You can plot the initial dataset and forecast graph
 
-- 📄 Thank you for your use, <b>NB : this project is in development</b>
+- 📄 Thank you for your use, <b>NB : [this project is in development](https://github.com/likwel/java-ai)</b>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=likwel&" alt="likwel" /></p>
