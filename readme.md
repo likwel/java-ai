@@ -29,29 +29,26 @@
 
 - 👯 Train your first model
     <b>
-        and set your parameters with  
-    </b>
-    <i>learning_rate = 0.01</i>,
-    <i>iterations = 1000</i> for example
+        and set your parameters with 
+    </b> <i>learning_rate = 0.01</i>,<i>iterations = 1000</i> for example
     <pre>
     LinearRegression model = new LinearRegression(0.01,1000);
 	model.fit(X, Y);
     </pre>
 
-
 - 👨‍💻 Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
     <pre>
     model.score(X, Y);
     <pre>
+    <hr>
     <b>Output : </b><br>
     <i>Score r2 = 88.88 %</i>
 
-- 📝 Evaluate your model by modifying parameters like learning_rate and iterations
+- 📝 Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
+    For example We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 
-- 💬 Ask me about 
+- 📫 You can plot the initial dataset and forecast graph
 
-- 📫 How to reach me 
-
-- 📄 Know about my experiences 
+- 📄 Thank you for your use, <b>NB : this project is in development</b>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=likwel&" alt="likwel" /></p>
