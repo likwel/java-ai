@@ -38,7 +38,6 @@
 
 - 👨‍💻 Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
     <pre>model.score(X, Y);<pre>
-    <hr>
     <b>Output : </b><br>
     <i>Score r2 = 88.88 %</i>
 
