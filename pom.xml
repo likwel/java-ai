@@ -8,7 +8,7 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ml</groupId>
+	<groupId>com.java.ai</groupId>
 	<artifactId>java-ai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>java-ai</name>

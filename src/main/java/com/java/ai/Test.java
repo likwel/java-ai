@@ -23,7 +23,7 @@ public class Test {
 		Matrice x_pred = new Matrice(new double [][] {{ 3.14}});
 		//x_pred.show();
 
-		LinearRegression model = new LinearRegression(0.01,1000000);
+		LinearRegression model = new LinearRegression(0.01,1000);
 		model.fit(X, Y);
 		model.score(X, Y);
 		Matrice prediction = model.predict(X);
