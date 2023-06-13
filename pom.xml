@@ -16,6 +16,25 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	<developers>
+    <developer>
+		<name>Elie Fenohasina ANDRIATSITOHAINA</name>
+		<email>eliefenohasina@gmail.com</email>
+		<organization>Personal</organization>
+		<organizationUrl>https://www.linkedin.com/in/elie-fenohasina-andriatsitohaina/</organizationUrl>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+		<name>The Apache Software License, Version 2.0</name>
+		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://github.com/likwel/java-ai</connection>
+		<developerConnection>scm:git:ssh://github.com/likwel/java-ai</developerConnection>
+		<url>https://github.com/likwel/java-ai</url>
+   </scm>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -40,6 +59,32 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+					<id>attach-sources</id>
+					<goals>
+						<goal>jar-no-fork</goal>
+					</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+					<id>attach-javadocs</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
