@@ -1,11 +1,11 @@
 
-<h1 align="center">JAVA AI API</h1>
+<h1>JAVA AI API</h1>
 
 <p align="left">This project is a prediction modeling API for Machine Learning and Deep Learning with Java</p>
 
 <h3>Documentation</h3>
 
-- 🔭 Install to your [maven](https://maven.apache.org/) project the dependency (in pom.xml)
+- 🔭 Install this dependency to your [maven](https://maven.apache.org/) project (copy in <i>pom.xml</i>)
     <pre>
 	&lt;dependency&gt;
 	 &lt;groupId&gt;com.java.ai&lt;/groupId&gt;
