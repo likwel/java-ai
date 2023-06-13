@@ -62,7 +62,8 @@ model.fit(X, Y);
 ```
 
 ## 👨‍💻 Show the score 
-* Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
+* To determine the performance of your model, you can use this score. 
+* This score is the coefficient of determination called r2 (statistically based).
 ```sh
 model.score(X, Y);
 ```
@@ -73,10 +74,12 @@ model.score(X, Y);
 
 ## 📝 Evaluate your model
 *   Evaluate your model by modifying parameters like <i>learning_rate </i> and <i>iterations</i>
+*   You increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 *   For example :
-We increase <i>iterations = 10 000</i> and compare your score and evaluate again to achieve the <b>highest score</b>
 
 ## 📫 Predict sample x data :
+*   To get a prediction of X data given, you can use a [predict] function whith a Matrix parameter.
+*   For example : 
 ```sh
 Matrice x_pred = new Matrice(new double [][] {{ 3.14}});
 Matrice y_pred = model.predict(x_pred);
@@ -87,9 +90,12 @@ y_pred.show();
     <i>y_pred : [[ 3.2489994144143095 ]]</i>
     <hr>
 
-## 📫 You can plot the initial dataset and forecast graph
+## 📫 Plot the result graph
+*   You can plot the initial dataset and forecast in even graph
+*   The scatter of X and Y is displayed as bule
+*   The green prediction line is called Model
  <img align="center" src="https://github.com/likwel/java-ai/blob/main/src/main/java/com/java/ai/teqlwe08.png" alt="forecast" />
 
-## 📄 Thank you for your use, <b>NB : [this project is in development](https://github.com/likwel/java-ai)</b>
+## NB : [This project is in development](https://github.com/likwel/java-ai)</b>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=likwel&" alt="likwel" /></p>
