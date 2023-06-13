@@ -33,9 +33,10 @@ Matrice Y = new Matrice(y);
    <b>
         and set your parameters with 
     </b> <i>learning_rate = 0.01</i>,<i>iterations = 1000</i> for example
+
 ```sh
-    LinearRegression model = new LinearRegression(0.01,1000);
-	model.fit(X, Y);
+LinearRegression model = new LinearRegression(0.01,1000);
+model.fit(X, Y);
 ```
 
 ## 👨‍💻 Show the score to determine the performance of your model. This score is the coefficient of determination called r2.
