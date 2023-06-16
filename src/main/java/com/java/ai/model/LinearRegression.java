@@ -3,6 +3,7 @@ package com.java.ai.model;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.json.JSONObject;
 
@@ -44,7 +45,7 @@ public class LinearRegression {
 	public LinearRegression(double learning_rate, int iterations, int n_features) {
 		super();
 		this.n_features = n_features;
-		//this.theta = new Matrice().random(n_features +1, 1);
+		// this.theta = new Matrice().random(n_features +1, 1);
 		this.learning_rate = learning_rate;
 		this.iterations = iterations;
 		System.out.println("learning_rate : " +learning_rate);
@@ -64,7 +65,7 @@ public class LinearRegression {
 
 	public LinearRegression(double learning_rate, int iterations) {
 		super();
-		//this.theta = new Matrice().random(2, 1);
+		//this.theta = new Matrice().random(n_features +1, 1);
 		this.learning_rate = learning_rate;
 		this.iterations = iterations;
 		System.out.println("learning_rate : " +learning_rate);
@@ -209,22 +210,58 @@ public class LinearRegression {
 
 	public Matrice getTheta(Matrice X, Matrice Y, String estimator){
 
-		System.out.println("Theta initiale");
+		System.out.println("Theta initiale : ");
 
 		if(estimator=="least_square"){
-			return least_square(X,Y);
+
+			TreeMap<Double, Matrice> theta = least_square(X,Y);// new TreeMap<Double, Matrice>();
+
+			// return least_square(X,Y);
+			double nb = theta.firstKey();
+
+			System.out.println("Nb min : "+nb);
+			return theta.firstEntry().getValue().dot(nb);
 
 		}else{
 			return mayer(X,Y);
 		}
 		
 	}
-	public Matrice least_square(Matrice X, Matrice Y){
+	public TreeMap least_square(Matrice X, Matrice Y){
+
 		Matrice prod_ = X.T().dot(X);
 		Matrice prod_2 = X.T().dot(Y);
+		//prod_.inv().dot(prod_2).show();
+		//System.out.println("Min " + prod_.min());
 
-		prod_.inv().dot(prod_2).show();
-		return prod_.inv().dot(prod_2);
+		double min_1 = prod_.min();
+		double min_2 = prod_2.min();
+
+		double min = 0;
+
+		if(min_1<min_2){
+			min = min_1;
+		}else{
+			min = min_2;
+		}
+
+		
+		//System.out.println("Min 2 " + prod_2.min());
+		prod_ = prod_.dot(1/min);
+		prod_2 = prod_2.dot(1/min);
+
+		//prod_.show();
+
+		//TreeMap<Double, Matrice> hm1 = new TreeMap<Double, Matrice>();
+
+		TreeMap<Double, Matrice> theta = new TreeMap<Double, Matrice>();
+
+		prod_.inv().show();
+
+		theta.put(min,prod_.inv().dot(prod_2));
+
+		// return prod_.inv().dot(prod_2);
+		return theta;
 
 	}
 
@@ -276,7 +313,8 @@ public class LinearRegression {
 			return theta;
 		}else{
 			System.err.println("Methode de Mayer n'est pas compatible à une prévision +/= à 3 features");
-			return least_square(X,Y);
+			// return least_square(X,Y);
+			return new Matrice();
 		}
 
 		

@@ -26,7 +26,7 @@ public class Matrice {
     }
 
     public Matrice() {
-        
+        //this.a=this.a;
     }
 
     /**
@@ -418,6 +418,8 @@ public class Matrice {
 
         double[][] tab1 = this.a;
 
+        //System.out.println("null "+this.a.length);
+
         int len_x = tab1.length;
         int len_y = tab1[0].length + tab2[0].length;
 
@@ -750,5 +752,73 @@ public class Matrice {
 
         return this.a[this.dim_x-1][0];
     }
+
+    public void head(int ligne) {
+
+        String output = "[";
+        for (int i = 0; i < ligne +1; i++) {
+            output += "[ ";
+            for (int j = 0; j < this.dim_y; j++) {
+                // System.out.print(this.a[i][j] + " ");
+                if (this.a != null) {
+                    output += this.a[i][j];
+                }
+                if (this.s != null) {
+                    output += this.s[i][j];
+                }
+                output += " ";
+            }
+            if (i < ligne) {
+                output += "]" + "\n";
+            } else {
+                output += "]";
+            }
+            // System.out.println();
+
+        }
+        output += "]\n";
+        System.out.print(output);
+        System.out.println("Dimension : (" + ligne + "," + this.dim_y + ")");
+    }
+
+    public Matrice replaceAll(String arg1, String arg2) {
+
+        //double[][] res = new double[this.dim_x][this.dim_y];
+
+        for (int i = 0; i < this.dim_x; i++) {
+            for (int j = 0; j < this.dim_y; j++) {
+                this.s[i][j] = this.s[i][j].replaceAll(arg1, arg2);
+            }
+        }
+
+        return new Matrice(this.s);
+    }
+
+    public Matrice dbl() {
+
+        double[][] res = new double[this.dim_x][this.dim_y];
+
+        for (int i = 0; i < this.dim_x; i++) {
+            for (int j = 0; j < this.dim_y; j++) {
+                res[i][j] = Double.parseDouble(this.s[i][j]);
+            }
+        }
+
+        return new Matrice(res);
+    }
+
+    // public Matrice fillna(double nombre) {
+
+    //     //double[][] res = new double[this.dim_x][this.dim_y];
+
+    //     for (int i = 0; i < this.dim_x; i++) {
+    //         for (int j = 0; j < this.dim_y; j++) {
+    //             this.s[i][j] = this.s[i][j].replaceAll(arg1, arg2);
+    //         }
+    //     }
+
+    //     return new Matrice(this.s);
+    // }
+
 
 }
